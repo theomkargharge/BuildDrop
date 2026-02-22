@@ -1,4 +1,5 @@
 'use client'
+export const dynamic = 'force-dynamic'
 import { useState } from 'react'
 import { createClient } from '@/lib/supabase/client'
 import { useRouter } from 'next/navigation'
@@ -10,31 +11,41 @@ export default function CreateWorkspacePage() {
   const router = useRouter()
   const supabase = createClient()
 
-  async function handleCreate(e: React.FormEvent) {
-    e.preventDefault()
-    setLoading(true)
-    setError('')
+async function handleCreate(e: React.FormEvent) {
+  e.preventDefault()
+  setLoading(true)
+  setError('')
 
-    const { data: { user } } = await supabase.auth.getUser()
-    if (!user) { setError('Not logged in'); setLoading(false); return }
+  const { data: { user } } = await supabase.auth.getUser()
+  if (!user) { setError('Not logged in'); setLoading(false); return }
 
-    const { data: workspace, error: wsError } = await supabase
-      .from('workspaces')
-      .insert({ name, owner_id: user.id })
-      .select()
-      .single()
+  console.log('Creating workspace for user:', user.id)
 
-    if (wsError) { setError(wsError.message); setLoading(false); return }
+  const { data: workspace, error: wsError } = await supabase
+    .from('workspaces')
+    .insert({ name, owner_id: user.id })
+    .select()
+    .single()
 
-    const { error: memberError } = await supabase
-      .from('workspace_members')
-      .insert({ workspace_id: workspace.id, user_id: user.id, role: 'owner' })
+  console.log('Workspace result:', workspace, wsError)
 
-    if (memberError) { setError(memberError.message); setLoading(false); return }
+  if (wsError) { setError(wsError.message); setLoading(false); return }
 
-    router.refresh()
-    router.push('/dashboard')
-  }
+  const { error: memberError } = await supabase
+    .from('workspace_members')
+    .insert({
+      workspace_id: workspace.id,
+      user_id: user.id,
+      role: 'owner'
+    })
+
+  console.log('Member insert error:', memberError)
+
+if (memberError) { setError(memberError.message); setLoading(false); return }
+
+  router.refresh()
+  router.push('/dashboard')
+}
 
   return (
     <div style={{
@@ -47,6 +58,7 @@ export default function CreateWorkspacePage() {
         background: 'radial-gradient(circle, rgba(99,102,241,0.12) 0%, transparent 70%)',
         borderRadius: '50%', filter: 'blur(60px)', pointerEvents: 'none'
       }} />
+
       <div style={{ width: '100%', maxWidth: '460px', animation: 'fadeUp 0.5s ease forwards' }}>
         <div style={{ textAlign: 'center', marginBottom: '40px' }}>
           <div style={{ fontSize: '48px', marginBottom: '16px' }}>🏢</div>
@@ -55,6 +67,7 @@ export default function CreateWorkspacePage() {
             A workspace holds all your apps, builds and team members
           </p>
         </div>
+
         <div className="glass" style={{ borderRadius: '20px', padding: '32px' }}>
           <form onSubmit={handleCreate} style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
             <div>
@@ -75,6 +88,7 @@ export default function CreateWorkspacePage() {
                 onBlur={e => e.target.style.borderColor = 'var(--border)'}
               />
             </div>
+
             {error && (
               <div style={{
                 padding: '12px 16px', borderRadius: '10px', fontSize: '13px',
@@ -82,6 +96,7 @@ export default function CreateWorkspacePage() {
                 color: 'var(--danger)'
               }}>{error}</div>
             )}
+
             <button type="submit" disabled={loading} style={{
               padding: '13px', background: 'linear-gradient(135deg, var(--accent), var(--accent-2))',
               border: 'none', borderRadius: '10px', color: 'white', fontSize: '14px',
