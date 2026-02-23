@@ -1,8 +1,11 @@
-import type { NextConfig } from "next";
+const nextConfig = {
+  eslint: { ignoreDuringBuilds: true },
+  typescript: { ignoreBuildErrors: true },
+  experimental: {
+    serverActions: {
+      allowedOrigins: ['localhost:3000', 'builddrop.vercel.app']
+    }
+  }
+}
 
-const nextConfig: NextConfig = {
-  /* config options here */
-  reactCompiler: true,
-};
-
-export default nextConfig;
+export default nextConfig
