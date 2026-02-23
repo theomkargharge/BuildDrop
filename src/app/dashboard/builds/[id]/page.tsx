@@ -106,7 +106,7 @@ export default function BuildDetailPage() {
         </div>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 300px', gap: '24px', alignItems: 'start' }}>
+      <div className="responsive-two-col">
 
         {/* Left column */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
@@ -200,7 +200,7 @@ export default function BuildDetailPage() {
         </div>
 
         {/* Right column — QR */}
-        <div style={{ position: 'sticky', top: '24px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
+        <div className="sticky-right" style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
           <div className="glass" style={{ borderRadius: '20px', padding: '24px', textAlign: 'center' }}>
             <h2 style={{ fontSize: '16px', fontWeight: '700', marginBottom: '6px' }}>📱 Scan to Install</h2>
             <p style={{ fontSize: '12px', color: 'var(--text-muted)', marginBottom: '20px' }}>

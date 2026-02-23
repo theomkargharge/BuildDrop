@@ -3,13 +3,41 @@ import Link from 'next/link'
 export default function LandingPage() {
   return (
     <div style={{ minHeight: '100vh', background: 'var(--bg)', overflow: 'hidden' }}>
+
+      <style>{`
+        .nav { display: flex; justify-content: space-between; align-items: center; padding: 20px 48px; border-bottom: 1px solid var(--border); position: sticky; top: 0; background: rgba(10,10,15,0.8); backdrop-filter: blur(12px); z-index: 50; }
+        .nav-buttons { display: flex; gap: 12px; }
+        .hero { text-align: center; padding: 100px 24px 80px; position: relative; }
+        .hero-buttons { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+        .features-section { padding: 80px 48px; max-width: 1100px; margin: 0 auto; }
+        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+        .cta-section { padding: 80px 48px; text-align: center; }
+        .cta-box { max-width: 600px; margin: 0 auto; padding: 60px 48px; border-radius: 28px; background: var(--surface); border: 1px solid var(--border); position: relative; overflow: hidden; }
+        .footer { padding: 24px 48px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+
+        @media (max-width: 768px) {
+          .nav { padding: 16px 20px; }
+          .nav-buttons .hide-mobile { display: none; }
+          .hero { padding: 60px 20px 40px; }
+          .hero h1 { font-size: 42px !important; letter-spacing: -1px !important; }
+          .hero p { font-size: 16px !important; }
+          .features-section { padding: 40px 20px; }
+          .features-grid { grid-template-columns: 1fr; }
+          .cta-section { padding: 40px 20px; }
+          .cta-box { padding: 40px 24px; }
+          .cta-box h2 { font-size: 28px !important; }
+          .footer { padding: 20px; flex-direction: column; gap: 12px; text-align: center; }
+        }
+
+        @media (max-width: 480px) {
+          .hero h1 { font-size: 34px !important; }
+          .hero-buttons a { width: 100%; text-align: center; }
+          .hero-buttons { flex-direction: column; align-items: center; }
+        }
+      `}</style>
+
       {/* Nav */}
-      <nav style={{
-        display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-        padding: '20px 48px', borderBottom: '1px solid var(--border)',
-        position: 'sticky', top: 0, background: 'rgba(10,10,15,0.8)',
-        backdropFilter: 'blur(12px)', zIndex: 50
-      }}>
+      <nav className="nav">
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
           <div style={{
             width: '32px', height: '32px', borderRadius: '10px',
@@ -18,8 +46,8 @@ export default function LandingPage() {
           }}>📦</div>
           <span style={{ fontFamily: 'Syne, sans-serif', fontWeight: '800', fontSize: '18px' }}>BuildDrop</span>
         </div>
-        <div style={{ display: 'flex', gap: '12px' }}>
-          <Link href="/login" style={{
+        <div className="nav-buttons">
+          <Link href="/login" className="hide-mobile" style={{
             padding: '9px 20px', borderRadius: '10px',
             border: '1px solid var(--border)', color: 'var(--text)',
             textDecoration: 'none', fontSize: '14px', fontWeight: '500'
@@ -34,7 +62,7 @@ export default function LandingPage() {
       </nav>
 
       {/* Hero */}
-      <div style={{ textAlign: 'center', padding: '100px 24px 80px', position: 'relative' }}>
+      <div className="hero">
         <div style={{
           position: 'absolute', top: '0', left: '50%', transform: 'translateX(-50%)',
           width: '600px', height: '400px',
@@ -64,44 +92,40 @@ export default function LandingPage() {
           Stop sharing APKs over Slack and TestFlight links over email.
           BuildDrop organizes your builds and notifies your team automatically.
         </p>
-        <div style={{ display: 'flex', gap: '14px', justifyContent: 'center', flexWrap: 'wrap' }}>
+        <div className="hero-buttons">
           <Link href="/login" style={{
             padding: '15px 36px', borderRadius: '14px',
             background: 'linear-gradient(135deg, var(--accent), var(--accent-2))',
             color: 'white', textDecoration: 'none', fontSize: '16px',
             fontWeight: '700', fontFamily: 'Syne, sans-serif',
             boxShadow: '0 0 40px rgba(99,102,241,0.3)'
-          }}>
-            Start for Free →
-          </Link>
+          }}>Start for Free →</Link>
           <Link href="/login" style={{
             padding: '15px 36px', borderRadius: '14px',
             border: '1px solid var(--border)', color: 'var(--text)',
             textDecoration: 'none', fontSize: '16px', fontWeight: '500'
-          }}>
-            See how it works
-          </Link>
+          }}>See how it works</Link>
         </div>
       </div>
 
       {/* Features */}
-      <div style={{ padding: '80px 48px', maxWidth: '1100px', margin: '0 auto' }}>
+      <div className="features-section">
         <div style={{ textAlign: 'center', marginBottom: '64px' }}>
-          <h2 style={{ fontSize: '40px', fontWeight: '800', letterSpacing: '-1px', marginBottom: '16px' }}>
+          <h2 style={{ fontSize: 'clamp(28px, 5vw, 40px)', fontWeight: '800', letterSpacing: '-1px', marginBottom: '16px' }}>
             Everything your team needs
           </h2>
           <p style={{ color: 'var(--text-muted)', fontSize: '16px', maxWidth: '480px', margin: '0 auto' }}>
             From upload to install in seconds. No more hunting for the latest build.
           </p>
         </div>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '20px' }}>
+        <div className="features-grid">
           {[
             { icon: '⬆️', title: 'Upload & Share Instantly', desc: 'Drag and drop your APK or paste your TestFlight link. Get a shareable URL in seconds.' },
             { icon: '📱', title: 'QR Code for Every Build', desc: 'Every build gets a QR code. Testers scan and install directly — no emails needed.' },
-            { icon: '🔔', title: 'Team Notifications', desc: 'Your entire team gets notified the moment a new build is uploaded. No more "hey did you get the build?"' },
+            { icon: '🔔', title: 'Team Notifications', desc: 'Your entire team gets notified the moment a new build is uploaded.' },
             { icon: '🏷️', title: 'Organize with Tags', desc: 'Tag builds as QA, Staging, Production, or Hotfix. Always know what stage a build is at.' },
-            { icon: '📊', title: 'Build History', desc: 'Every build is archived with its version, release notes, and download count. Full history at a glance.' },
-            { icon: '👥', title: 'Team Workspaces', desc: 'Invite developers and testers. Control who can upload and who can only download.' },
+            { icon: '📊', title: 'Build History', desc: 'Every build is archived with version, release notes, and download count.' },
+            { icon: '👥', title: 'Team Workspaces', desc: 'Invite developers and testers. Control who can upload and who can download.' },
           ].map((f, i) => (
             <div key={i} className="glass" style={{ borderRadius: '20px', padding: '28px' }}>
               <div style={{
@@ -118,12 +142,8 @@ export default function LandingPage() {
       </div>
 
       {/* CTA */}
-      <div style={{ padding: '80px 48px', textAlign: 'center' }}>
-        <div style={{
-          maxWidth: '600px', margin: '0 auto', padding: '60px 48px',
-          borderRadius: '28px', background: 'var(--surface)',
-          border: '1px solid var(--border)', position: 'relative', overflow: 'hidden'
-        }}>
+      <div className="cta-section">
+        <div className="cta-box">
           <div style={{
             position: 'absolute', top: '-60px', left: '50%', transform: 'translateX(-50%)',
             width: '300px', height: '200px',
@@ -141,17 +161,12 @@ export default function LandingPage() {
             background: 'linear-gradient(135deg, var(--accent), var(--accent-2))',
             color: 'white', textDecoration: 'none', fontSize: '16px',
             fontWeight: '700', fontFamily: 'Syne, sans-serif'
-          }}>
-            Get Started Free →
-          </Link>
+          }}>Get Started Free →</Link>
         </div>
       </div>
 
       {/* Footer */}
-      <div style={{
-        padding: '24px 48px', borderTop: '1px solid var(--border)',
-        display: 'flex', justifyContent: 'space-between', alignItems: 'center'
-      }}>
+      <div className="footer">
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
           <span style={{ fontSize: '16px' }}>📦</span>
           <span style={{ fontFamily: 'Syne, sans-serif', fontWeight: '700', fontSize: '14px' }}>BuildDrop</span>

@@ -60,7 +60,7 @@ export default function AppsPage() {
           }}>Create your first app</Link>
         </div>
       ) : (
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '20px' }}>
+    <div className="responsive-grid-apps">
           {apps.map(app => (
             <Link key={app.id} href={`/dashboard/apps/${app.id}`} style={{ textDecoration: 'none' }}>
               <div className="glass" style={{

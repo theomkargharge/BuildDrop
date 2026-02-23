@@ -33,8 +33,8 @@ function BuildRow({ build }: any) {
         padding: '16px 20px', borderRadius: '12px', cursor: 'pointer',
         transition: 'all 0.2s', marginBottom: '8px'
       }}
-      onMouseEnter={e => (e.currentTarget as HTMLElement).style.borderColor = 'var(--accent)'}
-      onMouseLeave={e => (e.currentTarget as HTMLElement).style.borderColor = 'var(--border)'}
+        onMouseEnter={e => (e.currentTarget as HTMLElement).style.borderColor = 'var(--accent)'}
+        onMouseLeave={e => (e.currentTarget as HTMLElement).style.borderColor = 'var(--border)'}
       >
         <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
           <div style={{
@@ -89,7 +89,7 @@ export default function DashboardPage() {
         .maybeSingle()
 
       if (!memberData || !memberData.workspaces) {
-   router.push('/create-workspace')
+        router.push('/create-workspace')
         return
       }
 
@@ -147,7 +147,7 @@ export default function DashboardPage() {
       </div>
 
       {/* Stats */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '16px', marginBottom: '40px' }}>
+      <div className="responsive-grid-3" style={{ marginBottom: '40px' }}>
         <StatCard label="Total Apps" value={apps.length} icon="📱" color="#6366f1" />
         <StatCard label="Recent Builds" value={builds.length} icon="📦" color="#a855f7" />
         <StatCard label="Team Members" value={members.length} icon="👥" color="#22c55e" />
@@ -184,20 +184,20 @@ export default function DashboardPage() {
       {apps.length > 0 && (
         <div>
           <h2 style={{ fontSize: '18px', fontWeight: '700', marginBottom: '16px' }}>Your Apps</h2>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: '16px' }}>
+  <div className="responsive-grid-apps" style={{ gap: '16px' }}>
             {apps.map(app => (
               <Link key={app.id} href={`/dashboard/apps/${app.id}`} style={{ textDecoration: 'none' }}>
                 <div className="glass" style={{
                   borderRadius: '16px', padding: '20px', cursor: 'pointer', transition: 'all 0.2s'
                 }}
-                onMouseEnter={e => {
-                  (e.currentTarget as HTMLElement).style.borderColor = 'var(--accent)'
-                  ;(e.currentTarget as HTMLElement).style.transform = 'translateY(-2px)'
-                }}
-                onMouseLeave={e => {
-                  (e.currentTarget as HTMLElement).style.borderColor = 'var(--border)'
-                  ;(e.currentTarget as HTMLElement).style.transform = 'translateY(0)'
-                }}
+                  onMouseEnter={e => {
+                    (e.currentTarget as HTMLElement).style.borderColor = 'var(--accent)'
+                      ; (e.currentTarget as HTMLElement).style.transform = 'translateY(-2px)'
+                  }}
+                  onMouseLeave={e => {
+                    (e.currentTarget as HTMLElement).style.borderColor = 'var(--border)'
+                      ; (e.currentTarget as HTMLElement).style.transform = 'translateY(0)'
+                  }}
                 >
                   <div style={{ fontSize: '32px', marginBottom: '12px' }}>
                     {app.platform === 'ios' ? '🍎' : '🤖'}
