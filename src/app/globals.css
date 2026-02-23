@@ -60,3 +60,141 @@ h1, h2, h3, h4, h5 {
 
 .animate-fade-up { animation: fadeUp 0.5s ease forwards; }
 .animate-pulse-glow { animation: pulse-glow 2s ease infinite; }
+
+/* ===== RESPONSIVE STYLES ===== */
+
+@media (max-width: 768px) {
+
+  /* Dashboard overview stats */
+  div[style*="repeat(3, 1fr)"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Apps grid */
+  div[style*="repeat(auto-fill, minmax(280px"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  div[style*="repeat(auto-fill, minmax(220px"] {
+    grid-template-columns: 1fr 1fr !important;
+  }
+
+  /* Build detail two column layout */
+  div[style*="1fr 300px"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* QR code sticky */
+  div[style*="sticky"] {
+    position: relative !important;
+    top: 0 !important;
+  }
+
+  /* Landing page nav */
+  nav[style*="48px"] {
+    padding: 16px 20px !important;
+  }
+
+  /* Landing hero */
+  div[style*="100px 24px 80px"] {
+    padding: 60px 20px 40px !important;
+  }
+
+  /* Landing features grid */
+  div[style*="minmax(300px, 1fr)"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Landing padding */
+  div[style*="80px 48px"] {
+    padding: 40px 20px !important;
+  }
+
+  /* Members page invite grid */
+  div[style*="1fr auto"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Build upload modal tag buttons */
+  div[style*="display: flex"][style*="gap: 8px"] {
+    flex-wrap: wrap !important;
+  }
+
+  /* Builds list row */
+  div[style*="justifyContent: 'space-between'"] {
+    flex-wrap: wrap !important;
+    gap: 12px !important;
+  }
+
+  /* New app platform selector */
+  div[style*="repeat(2, 1fr)"] {
+    grid-template-columns: 1fr 1fr !important;
+  }
+
+  /* Version + build number grid */
+  div[style*="1fr 1fr"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Settings max width */
+  div[style*="maxWidth: '640px'"] {
+    max-width: 100% !important;
+  }
+
+  div[style*="maxWidth: '760px'"] {
+    max-width: 100% !important;
+  }
+
+  div[style*="maxWidth: '900px'"] {
+    max-width: 100% !important;
+  }
+
+  div[style*="maxWidth: '560px'"] {
+    max-width: 100% !important;
+  }
+
+  /* Share link copy button */
+  div[style*="display: flex"][style*="gap: 10px"] {
+    flex-wrap: wrap !important;
+  }
+
+  /* Build detail header */
+  h1[style*="28px"] {
+    font-size: 22px !important;
+  }
+
+  h1[style*="32px"] {
+    font-size: 26px !important;
+  }
+
+  /* Landing CTA section */
+  div[style*="60px 48px"] {
+    padding: 40px 24px !important;
+  }
+
+  /* Footer */
+  div[style*="24px 48px"] {
+    padding: 20px !important;
+    flex-direction: column !important;
+    gap: 12px !important;
+    text-align: center !important;
+  }
+}
+
+@media (max-width: 480px) {
+  div[style*="repeat(auto-fill, minmax(220px"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Modal full screen on small phones */
+  div[style*="maxWidth: '520px'"] {
+    max-width: 100% !important;
+    border-radius: 16px !important;
+  }
+
+  /* Landing headline */
+  h1[style*="clamp"] {
+    font-size: 36px !important;
+    letter-spacing: -1px !important;
+  }
+}
